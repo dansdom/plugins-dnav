@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title></title>
+          <!-- Meta tags -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />  <!-- w3c recomends this meta tag  -->
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />  <!-- w3c recomends this meta tag  -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="copyright" content="" />
+	<meta name="author" content="" />
+	<meta name="rating" content="general" />
+	<meta name="robots" content="all" />
+        <!-- Stylesheets -->
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+	    <!-- Javascripts -->
+    <script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="js/dnav.js"></script>
+    <script language="javascript" type="text/javascript">
+    		$(document).ready(function(){
+    			$(".navWrap ul").Dnav();
+				$(".navWrap2 ul").Dnav({navPrev : ".navWrap2 #prev2",
+			navNext : ".navWrap2 #next2",});
+			});
+    </script>
+
+</head>
+
+<body>
+
+      <div id="wrap">
+      
+      	<h1>Dynamic Nav Plugin Demo</h1>	
+      	   <div class="navWrap">
+      	   		<ul>
+      	   			<li><a href="">Lorem ipsum</a></li>
+      	   			<li><a href="">Pellentesque</a></li>
+      	   			<li><a href="">Donec Non Nulla</a></li>
+      	   			<li><a href="">Nulla lectus est</a></li>
+      	   			<li><a href="">Fermentum</a></li>
+      	   			<li><a href="">Phasellus</a></li>
+      	   			<li><a href="">Pellentesque</a></li>
+      	   			<li><a href="">Nam Dignissim</a></li>
+      	   			<li><a href="">Donec a Mauris</a></li>
+      	   			<li><a href="">Quisque Molestie</a></li>
+      	   			<li><a href="">Maecenas</a></li>
+      	   			<li><a href="">Donec</a></li> 			
+      	   		</ul>
+      	   </div>
+      	   
+      	   <div class="navWrap2">
+      	   		<ul>
+      	   			<li><a href="">Venenatis</a></li>
+      	   			<li><a href="">Viverra</a></li>
+      	   			<li><a href="">Massa Eleifend</a></li>
+      	   			<li><a href="">Quis Ligula</a></li>
+      	   			<li><a href="">Dignissim</a></li>
+      	   			<li><a href="">Etiam Augue</a></li>
+      	   			<li><a href="">Egestas</a></li>      	   			
+      	   			<li><a href="">Placerat ut Odio</a></li>
+      	   			<li><a href="">Aliquam</a></li>      	   			   			
+      	   		</ul>
+      	   </div>
+
+      </div>  <!-- end of wrap div -->
+      
+</body>
+</html>
