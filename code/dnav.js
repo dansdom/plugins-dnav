@@ -16,6 +16,8 @@
 			arrowWidth : 30,
 			navPrev : ".prev",
 			navNext : ".next",
+			anchorX :  0,
+			anchorY : 0,
 			disabled : "disabled",
 			speed : 500
 					 };
@@ -75,26 +77,26 @@
 		// style the nav arrows
 		nav.prev.css({
 						"position" : "absolute",
-						"top" : "0px",
-						"left" : "0px",
+						"top" : opts.anchorY + "px",
+						"left" : opts.anchorX + "px",
 						"width" : opts.arrowWidth + "px",
 						"z-index" : "2"
 					});
 		nav.next.css({
 						"position" : "absolute",
-						"top" : "0px",
-						"right" : "0px",
+						"top" : opts.anchorY + "px",
+						"right" : opts.anchorX + "px",
 						"width" : opts.arrowWidth + "px",
 						"z-index" : "2"
 					});
 		nav.arrowWidth = opts.arrowWidth * 2;
 		nav.find("li").each(function(){
-			nav.ulWidth += $(this).outerWidth();
-			//console.log($(this).width());			
+			nav.ulWidth += $(this).outerWidth();		
 		});
 		nav.ulWidth += nav.arrowWidth;
 		
-		console.log("ulWidth: "+nav.ulWidth+", navWidth: "+nav.navWidth+", arrowWidth: "+nav.arrowWidth+", nav controls: "+nav.navControls);
+		// console.log("ulWidth: "+nav.ulWidth+", navWidth: "+nav.navWidth+", arrowWidth: "+nav.arrowWidth+", nav controls: "+nav.navControls);
+		// decide whther to make or remove the controls
 		if (nav.ulWidth > nav.navWidth)
 		{
 			$.fn.Dnav.makeControls(nav, opts);
@@ -107,6 +109,7 @@
 		}				
 	};
 	
+	// gets the element selector class/id and the value
 	$.fn.Dnav.getEl = function(selector)
 	{
 		var selectorArray = selector.split(' ');
@@ -132,20 +135,15 @@
 	$.fn.Dnav.makeControls = function(nav, opts)
 	{
 		nav.navControls = true;
-		// will target the nav object specifically here
-		//$(opts.navPrev + ", " + opts.navNext).css("display","block").unbind();
+		// will target the nav object specifically here		
 		nav.prev.css("display","block").unbind().addClass(opts.disabled);
-		nav.next.css("display","block").unbind().removeClass(opts.disabled);
-		console.log(nav.prev);
-		//$(opts.navPrev).addClass(opts.disabled);
-		//$(opts.navNext).removeClass(opts.disabled);
+		nav.next.css("display","block").unbind().removeClass(opts.disabled);		
 		// style the list
 		nav.css({"padding-left":opts.arrowWidth+"px", "padding-right":opts.arrowWidth+"px", "position":"absolute", "top":"0px", "left":"0px", "width":nav.ulWidth+"px", "z-index":"1"}); 
 		// set the animation point to 0
 		nav.animationPoint = 0;
 		// set the nav counter to 0
-		nav.counter = 0;
-		//console.log("animation: "+nav.animationPoint+", counter: "+nav.counter);
+		nav.counter = 0;		
 		
 		nav.prev.click(function()
 		{
@@ -153,7 +151,6 @@
 			var leftPos = parseInt(nav.css("left")),
 				firstWidth = nav.children("li:eq(0)").outerWidth();	
 				
-			
 			// find the next animation point
 			nav.next.removeClass(opts.disabled);			
 			// find next animation point
@@ -164,7 +161,7 @@
 				nav.animate({"left":"0px"});
 				nav.counter = 0;			
 				$(this).addClass("disabled");
-				console.log(nav.counter);
+				// console.log(nav.counter);
 			}
 			else
 			{
@@ -175,7 +172,7 @@
 				{
 					nav.counter = 0;
 				}
-				console.log(nav.counter);			
+				// console.log(nav.counter);			
 			}
 			return false;		
 		});
@@ -196,6 +193,7 @@
 			var counterItemWidth = nav.children("li:eq("+(nav.counter)+")").outerWidth();
 			if (nav.animationPoint > (widthDiff - counterItemWidth))
 			{
+				// check the next navigation point and decide if this is the last or not
 				var nextAnimationPoint = leftPos - nav.children("li:eq("+(nav.counter + 1)+")").outerWidth() - nav.children("li:eq("+(nav.counter)+")").outerWidth();
 				var nextCounterItemWidth = nav.children("li:eq("+(nav.counter + 1)+")").outerWidth();
 				if (nextAnimationPoint < (widthDiff - nextCounterItemWidth))
@@ -205,9 +203,7 @@
 				// then animate to the next position			
 				nav.animate({"left":nav.animationPoint+"px"}, opts.speed);
 				nav.counter++;
-				console.log(nav.counter);
-				// check if this is the last nav point
-								
+				// console.log(nav.counter);											
 			}
 			else
 			{			
@@ -215,15 +211,16 @@
 				nav.animationPoint = -widthDiff;			
 				// add disabled class to the button			
 				$(this).addClass(opts.disabled);
-				console.log(nav.counter);
+				// console.log(nav.counter);
 			}
 			// I need to check for the next animation point so that I can assign the disabled class as I reach the end.
-			console.log("clicked next");
+			// console.log("clicked next");
 			return false;
 		});
 		
 	};	
 	
+	// removes the controls from the page and unbinds the events on them
 	$.fn.Dnav.removeControls = function(nav, opts)
 	{
 		nav.navControls = false;
