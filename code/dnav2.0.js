@@ -167,7 +167,7 @@
 			// set the nav counter to 0
 			this.el.counter = 0;		
 			
-			this.el.prev.click(function()
+			this.el.prev.bind('click.' + this.namespace, function()
 			{
 				nav.el.stop(true, true);
 				var leftPos = parseInt(nav.el.css("left")),
@@ -199,7 +199,7 @@
 				return false;		
 			});
 			
-			this.el.next.click(function()
+			this.el.next.bind('click.' + this.namespace, function()
 			{
 				nav.el.stop(true, true);
 				var nextWidth = nav.el.children("li:eq(" + nav.el.counter + ")").outerWidth(),
@@ -245,8 +245,8 @@
 		removeControls : function()
 		{
 			this.el.navControls = false;
-			this.el.next.unbind().css("display","none");	
-			this.el.prev.unbind().css("display","none");	
+			this.el.next.unbind("." + this.namespace).css("display","none");	
+			this.el.prev.unbind("." + this.namespace).css("display","none");	
 			this.el.css({
 				"position"	: "static",
 				"padding"	: "0px",
